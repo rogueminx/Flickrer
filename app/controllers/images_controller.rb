@@ -9,6 +9,8 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
     @comments = @image.comments
     @users = User.all
+    @tags = @image.tags
+
   end
 
   def new_tag

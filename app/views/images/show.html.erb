@@ -26,10 +26,17 @@
   <% if current_user %>
     <%= form_tag(new_tag_path) do %>
       <%= label_tag :user_to_tag %>
-      <%= select_tag :user_to_tag, options_from_collection_for_select(@users, "id", "email") %>
+      <%= select_tag :user_to_tag, options_from_collection_for_select(@users, "id", "username") %>
       <%= submit_tag %>
     <% end %>
   <hr>
+  <% end %>
+
+  <% if @tags.any? %>
+    <p>Users tagged in this photo</p>
+    <% @tags.each do |tag| %>
+      <p><%= User.find(tag.user_id).username %></p>
+    <% end %>
   <% end %>
 
   <% if current_user %>
