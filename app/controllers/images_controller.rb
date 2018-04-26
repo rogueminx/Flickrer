@@ -7,6 +7,7 @@ class ImagesController < ApplicationController
 
   def show
     @image = Image.find(params[:id])
+    @comments = @image.comments
   end
 
   def new
@@ -24,13 +25,14 @@ class ImagesController < ApplicationController
   end
 
   def edit
+
     @image = Image.find(params[:id])
   end
 
   def update
     @image = Image.find(params[:id])
     if @image.update(image_params)
-      redirect_to images_path
+      redirect_to image_path(@image)
     else
       render :edit
     end

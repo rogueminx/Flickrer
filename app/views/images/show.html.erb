@@ -1,3 +1,32 @@
-<p><%= image_tag @image.image.url %></p>
-<h2><%= @image.title %></h2>
-<p><%= @image.description %></p>
+
+
+
+<div class="table">
+  <div class="row header">
+    <p><%= image_tag @image.image.url %></p>
+    <h2><%= @image.title %></h2>
+    <p><%= @image.description %></p>
+  </div>
+
+  <hr>
+  <div class="row">
+    <h2>Comments:</h2>
+    <% if @image.comments.any? %>
+    <% @comments.each do |comment| %>
+    <div>
+      <h3><%= comment.body%></h3>
+    </div>
+    <% end %>
+  <% else %>
+    <p>There are no comments yet!</p>
+    <% end %>
+    <p><%= link_to "Add a comment", new_image_comment_path(@image) %></p>
+  </div>
+  <hr>
+  <div class="row">
+    <p><%= link_to "Edit image", edit_image_path(@image) %> |
+    <%= link_to "Delete image", image_path, :data => {
+                                                :confirm => "Are you sure?",
+                                                :method => "delete"} %></p>
+  </div>
+</div>
