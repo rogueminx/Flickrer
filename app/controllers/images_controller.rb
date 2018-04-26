@@ -8,6 +8,18 @@ class ImagesController < ApplicationController
   def show
     @image = Image.find(params[:id])
     @comments = @image.comments
+    @users = User.all
+  end
+
+  def new_tag
+    @image = Image.find(params[:id])
+
+    tag = Tag.new
+    tag.user_id = params[:user_to_tag]
+    tag.image_id = @image.id
+    tag.save
+
+    redirect_to image_path(@image)
   end
 
   def new

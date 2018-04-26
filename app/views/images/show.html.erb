@@ -23,10 +23,18 @@
     <p><%= link_to "Add a comment", new_image_comment_path(@image) %></p>
   </div>
   <hr>
-  <div class="row">
-    <p><%= link_to "Edit image", edit_image_path(@image) %> |
-    <%= link_to "Delete image", image_path, :data => {
-                                                :confirm => "Are you sure?",
-                                                :method => "delete"} %></p>
-  </div>
+  <%= form_tag(new_tag_path) do %>
+    <%= label_tag :user_to_tag %>
+    <%= select_tag :user_to_tag, options_from_collection_for_select(@users, "id", "email") %>
+    <%= submit_tag %>
+  <% end %>
+  <hr>
+  <% if current_user.id == @image.user_id %>
+    <div class="row">
+      <p><%= link_to "Edit image", edit_image_path(@image) %> |
+      <%= link_to "Delete image", image_path, :data => {
+                                                  :confirm => "Are you sure?",
+                                                  :method => "delete"} %></p>
+    </div>
+  <% end %>
 </div>
